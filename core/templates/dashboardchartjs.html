@@ -17,4 +17,50 @@
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script>
+      function geracor(){
+        cor = "";
+        cor += Math.floor(Math.random()*255) +',';
+        cor += Math.floor(Math.random()*255) +',';
+        cor += Math.floor(Math.random()*255);
+        return cor
+     }
+
+     grafano.onchange = () => {
+      const url = grafano.value
+        fetch(url)
+        .then((results) => {
+          return results.json()
+        })
+        .then((data) => {
+          grf = Chart.getChart("grafico")
+          if(grf) grf.destroy()
+          const ctx = grafico.getContext('2d')
+          const cor = geracor()
+          let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Consulta por mês',
+                data: data.data,
+                backgroundColor: "rgb("+cor+")",
+                borderColor: "rgb("+cor+")",
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          })
+        })
+     
+     }
+
+    </script>
+
 {% endblock %}

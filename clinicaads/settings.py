@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'clinicaads.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clinicaads2023',
+        'NAME': 'clinica2023',
         'HOST': 'localhost',
         'PORT': '3308',
         'USER': 'root',
